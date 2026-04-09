@@ -1,0 +1,51 @@
+# ============================================
+# AI Caption Lab - .gitignore
+# ============================================
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+
+# Backend
+Backend/.cache/
+Backend/__pycache__/
+Backend/*.log
+
+# Frontend
+Frontend/node_modules/
+Frontend/build/
+Frontend/.cache/
+Frontend/coverage/
+
+# Environment & Secrets
+.env
+.env.*
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ollama Models
+.ollama-models/
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
