@@ -7,10 +7,17 @@ import traceback
 import sys
 import io
 import os
+from pathlib import Path
+
+# Load .env from the Backend directory (ignored by git; copy from .env.example)
+from dotenv import load_dotenv
+load_dotenv(Path(__file__).parent / ".env")
 
 # Fix Windows console encoding for emojis
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+if sys.stdout and hasattr(sys.stdout, "buffer"):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+if sys.stderr and hasattr(sys.stderr, "buffer"):
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 from model import load_image_bytes, generate_styled_captions, refine_caption, generate_hashtags, analyze_multiple_images
 from model import select_best_models, load_selected_models, fetch_ollama_service_status

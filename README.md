@@ -34,13 +34,14 @@ Generate engaging, platform-optimized captions for your images using local AI mo
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
-   cd neuro-transfer
+   git clone https://github.com/Inamulhassan-dev/Neurocaption-Ai.git
+   cd Neurocaption-Ai
    ```
 
-2. **Run setup (Windows)**
+2. **Set up environment variables**
    ```bash
-   setup-windows.bat
+   cp Backend/.env.example Backend/.env
+   # Edit Backend/.env if you need to change model names or Ollama host
    ```
 
 3. **Pull required Ollama models**
@@ -49,12 +50,45 @@ Generate engaging, platform-optimized captions for your images using local AI mo
    ollama pull llama3.2:3b
    ```
 
-4. **Start all services**
+4. **Install dependencies**
+
+   *Windows (automated):*
+   ```bash
+   setup-windows.bat
+   ```
+
+   *Linux / macOS (manual):*
+   ```bash
+   # Backend
+   python3 -m venv .venv
+   source .venv/bin/activate
+   pip install -r Backend/requirements.txt
+
+   # Frontend
+   cd Frontend
+   npm install
+   npm run build
+   cd ..
+   ```
+
+5. **Start all services**
+
+   *Windows:*
    ```bash
    start-all.bat
    ```
 
-5. **Open your browser**
+   *Linux / macOS:*
+   ```bash
+   # Terminal 1 – backend
+   source .venv/bin/activate
+   cd Backend && python app.py
+
+   # Terminal 2 – frontend
+   cd Frontend && node serve-build.js
+   ```
+
+6. **Open your browser**
    - Frontend: http://localhost:3000
    - Backend API: http://localhost:8001
 
@@ -63,12 +97,13 @@ Generate engaging, platform-optimized captions for your images using local AI mo
 ## 📁 Project Structure
 
 ```
-neuro-transfer/
+Neurocaption-Ai/
 ├── Backend/              # FastAPI backend
 │   ├── app.py           # Main API server
 │   ├── model.py         # AI model logic
 │   ├── ai_detector.py   # AI image detection
 │   ├── requirements.txt # Python dependencies
+│   ├── .env.example     # Template – copy to .env and fill in
 │   └── Dockerfile       # Docker configuration
 │
 ├── Frontend/            # React frontend
@@ -76,10 +111,10 @@ neuro-transfer/
 │   │   ├── App.jsx     # Main application
 │   │   ├── styles.css  # Styling
 │   │   └── index.js    # Entry point
-│   ├── build/          # Production build
 │   └── package.json    # Node dependencies
 │
-├── .venv/              # Python virtual environment
+├── .venv/              # Python virtual environment (git-ignored)
+├── setup-windows.bat   # Windows: install deps + build + launch
 ├── start-all.bat       # Start all services
 ├── start-backend.bat   # Start backend only
 ├── start-frontend.bat  # Start frontend only

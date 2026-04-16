@@ -28,6 +28,8 @@ Frontend/coverage/
 # Environment & Secrets
 .env
 .env.*
+!.env.example
+!Backend/.env.example
 *.log
 
 # IDE
